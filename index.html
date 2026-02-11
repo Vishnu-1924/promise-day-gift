@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promise Day Gift for Nanna</title>
+
+<style>
+body{
+  margin:0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg,#ffdde1,#ee9ca7);
+  overflow:hidden;
+  text-align:center;
+}
+
+/* Flower animation */
+.flower{
+  position:fixed;
+  top:-10px;
+  font-size:22px;
+  animation: fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(110vh);}
+}
+
+.page{
+  display:none;
+  min-height:100vh;
+  padding:30px;
+}
+.page.active{display:block;}
+
+button{
+  padding:15px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  background:#ff5f9e;
+  color:white;
+  cursor:pointer;
+  margin-top:20px;
+}
+
+.card{
+  background:white;
+  border-radius:20px;
+  padding:25px;
+  max-width:520px;
+  margin:40px auto;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+/* Gift boxes */
+.boxes{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+.box{
+  width:120px;
+  height:120px;
+  background:#ff5f9e;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:40px;
+  cursor:pointer;
+  color:white;
+}
+.box.open{
+  background:white;
+  color:#ff5f9e;
+  font-size:17px;
+  padding:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Music -->
+<audio id="music" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 0 -->
+<div class="page active" id="page0">
+  <div class="card">
+    <h1>🎁 A Special Gift for Nanna</h1>
+    <button onclick="startGift()">Open Gift</button>
+  </div>
+</div>
+
+<!-- PAGE 1 : TEDDY DAY -->
+<div class="page" id="page1">
+  <div class="card">
+    <h2>🧸 Happy Teddy Day, Nanna</h2>
+    <p>
+      Nanna,  
+      just like a teddy,  
+      I want to be your comfort,  
+      your smile, and your safe place 🤍
+    </p>
+    <button onclick="nextWish()">Next</button>
+  </div>
+</div>
+
+<!-- PAGE 2 : PROMISE DAY -->
+<div class="page" id="page2">
+  <div class="card">
+    <h2>🤝 Happy Promise Day, Nanna</h2>
+    <p>
+      I promise to care for you,  
+      respect your feelings,  
+      and always stay honest with my heart 💖
+    </p>
+    <button onclick="showGifts()">Open Gifts</button>
+  </div>
+</div>
+
+<!-- PAGE 3 : GIFTS -->
+<div class="page" id="page3">
+  <div class="card">
+    <h2>🎁 Gifts for You, Nanna</h2>
+    <div class="boxes">
+      <div class="box" onclick="openBox(this,'🧸 A Teddy for your warm hugs')">🎁</div>
+      <div class="box" onclick="openBox(this,'🌸 Flowers for your beautiful smile')">🎁</div>
+      <div class="box" onclick="openBox(this,'🐶 A puppy for endless happiness')">🎁</div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Flower animation */
+for(let i=0;i<30;i++){
+  let f=document.createElement("div");
+  f.className="flower";
+  f.innerHTML="🌸";
+  f.style.left=Math.random()*100+"vw";
+  f.style.animationDuration=5+Math.random()*5+"s";
+  document.body.appendChild(f);
+}
+
+/* Page controls */
+function startGift(){
+  document.getElementById("music").play();
+  switchPage(0,1);
+}
+function nextWish(){
+  switchPage(1,2);
+}
+function showGifts(){
+  switchPage(2,3);
+}
+function switchPage(from,to){
+  document.getElementById("page"+from).classList.remove("active");
+  document.getElementById("page"+to).classList.add("active");
+}
+function openBox(box,text){
+  if(box.classList.contains("open")) return;
+  box.classList.add("open");
+  box.innerHTML=text;
+}
+</script>
+
+</body>
+</html>
